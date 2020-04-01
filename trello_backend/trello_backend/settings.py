@@ -46,7 +46,8 @@ INSTALLED_APPS = [
 
     'my_auth',
     'homepage',
-    'board'
+    'board',
+
 ]
 
 MIDDLEWARE = [
