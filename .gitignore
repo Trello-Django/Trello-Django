@@ -3,6 +3,9 @@
 # vscode
 /.vscode
 
+#PyCharm
+/.idea
+
 # dependencies
 /node_modules
 node_modules/
