@@ -1,0 +1,31 @@
+AUTH:
+    Auth && User:
+        "auth/register/" Create
+        "auth/login/" Create
+        "auth/change_password/" Update
+
+
+HOMEPAGE(PROFILE):
+    Profile:
+        "profile/" ListCreate
+        "profile/<int:pk>/" RetrieveUpdateDestroy
+        "profile/<int:pk>/change_role/" Update(IsProductManager)
+    Team:
+        "team/" ListCreate(IsProductManager)
+        "team/<int:pk>/" RetrieveUpdate(IsProductManager)Destroy(IsProductManager)
+        "team/<int:pk>/member/" ListCreate(IsProductManager)
+        "team/int:pk/member/<int:pk2>" RetrieveUpdate(IsProductManager)Destroy(IsProductManager)
+
+
+CORE:
+    Board && List:
+        "board/" ListCreate(IsProductManager)
+        "board/<int:pk>/" RetrieveUpdate(IsProductManager)Destroy(IsProductManager)
+        "board/<int:pk>/list/" ListCreate(IsProductManager)
+        "board/<int:pk>/list/<int:pk2>" RetrieveUpdate(IsProductManager)Destroy(IsProductManager)
+
+    Task:
+        "list/<int:pk>/task/" List(IsTeamMember)Create(IsProductManager)
+        "list/<int:pk>/task/<int:pk>/" Retrieve(IsTeamMember)Update(IsProductManager)Destroy(IsProductManager)
+        "list/<int:pk>/task/<int:pk>/complete_task" Update(IsReviewer)
+
