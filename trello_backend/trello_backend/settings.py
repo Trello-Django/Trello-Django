@@ -42,7 +42,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_jwt',
-    'django_filters',
+    # 'django_filters',
 
     'my_auth',
     'homepage',
@@ -64,6 +64,8 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'trello_backend.urls'
 
 AUTH_USER_MODEL = 'my_auth.MyUser'
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 TEMPLATES = [
     {

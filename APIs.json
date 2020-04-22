@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bd15f39d-86d7-40b0-9df4-3c87ad6a29ae",
+		"_postman_id": "30ca398d-843b-4b72-b92a-51b42eeab5a7",
 		"name": "Django-Trello",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -122,6 +122,45 @@
 		{
 			"name": "HomePage",
 			"item": [],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Board",
+			"item": [
+				{
+					"name": "BoardList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TaskList",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
