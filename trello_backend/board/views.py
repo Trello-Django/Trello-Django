@@ -2,7 +2,10 @@ from rest_framework import viewsets
 from rest_framework import mixins
 from .models import Board, List,Task
 from .serializers import BoardSerializer, TaskSerializer, ListSerializer
-import datetime
+
+
+from rest_framework.permissions import IsAuthenticated
+
 
 class BoardListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
                        mixins.CreateModelMixin, mixins.UpdateModelMixin,
@@ -31,7 +34,10 @@ class TaskListViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin,
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
+
+
     def perform_create(self, serializer):
-        serializer.save(owner = self.request.user, dueDate = datetime.datetime.now + datetime.timedelta(days=7))
+        serializer.save(owner = self.request.user)
+
 
 
