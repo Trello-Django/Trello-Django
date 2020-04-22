@@ -130,27 +130,39 @@
 				{
 					"name": "BoardList",
 					"request": {
-						"method": "GET",
-						"header": [],
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\":\"Board2\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": ""
+							"raw": "{{BASE_URL}}/board/boards/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"board",
+								"boards",
+								""
+							]
 						}
 					},
 					"response": []
 				},
 				{
 					"name": "ListList",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": ""
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "TaskList",
 					"request": {
 						"method": "GET",
 						"header": [],
