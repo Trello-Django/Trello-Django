@@ -1,14 +1,15 @@
-from django.urls import path
 
-
-from rest_framework.routers import DefaultRouter
+from rest_framework_extensions.routers import ExtendedSimpleRouter
 
 from .views import BoardViewSet,ListViewSet,TaskViewSet
 
-router = DefaultRouter()
+router = ExtendedSimpleRouter()
 
-router.register(r'boards',BoardViewSet)
-router.register(r'lists',ListViewSet)
-router.register(r'tasks',TaskViewSet)
+router.register(r'boards',BoardViewSet, basename='board').\
+    register(r'lists',ListViewSet, basename='board-list', parents_query_lookups=['board'])
+
+router.register(r'lists',ListViewSet, basename='list').\
+    register(r'tasks',TaskViewSet, basename='list-task',parents_query_lookups=['list'])
 
 urlpatterns = router.urls
+

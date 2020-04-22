@@ -15,7 +15,7 @@ class ListSerializer(serializers.ModelSerializer):
 
 class TaskSerializer(serializers.ModelSerializer):
     owner = MyUserSerializer(read_only=True)
-
+    list = ListSerializer(read_only=True)
     class Meta:
         model = Task
         fields = ('id','title','description','dueDate','created_at','attachment', 'image', 'owner','assigned','list')
