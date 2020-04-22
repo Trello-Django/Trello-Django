@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
     'my_auth',
     'homepage',
-    'board',
+    'core',
 
 ]
 
@@ -124,7 +124,7 @@ JWT_AUTH = {
     'JWT_VERIFY': True,
     'JWT_VERIFY_EXPIRATION': True,
     'JWT_LEEWAY': 0,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=300),
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(seconds=1800),
     'JWT_AUDIENCE': None,
     'JWT_ISSUER': None,
 
@@ -182,3 +182,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

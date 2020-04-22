@@ -3,24 +3,34 @@ from django.db import models
 from my_auth.models import MyUser
 import datetime
 
+
 class Board(models.Model):
+    STATUSES = (
+        (1,'ACTIVE'),
+        (2,'CLOSED')
+    )
     title = models.CharField(max_length=300)
-    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='boards_owner')
-    reviewer = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='boards_reviwer')
+    created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
+    status = models.IntegerField(choices=STATUSES, default=1)
 
     class Meta:
-        verbose_name = 'board'
+        verbose_name = 'core'
         verbose_name_plural = 'boards'
     def __str__(self):
-        return f'Board:{self.title}, owner:{self.owner}, reviewer:{self.reviewer}'
+        return f'Board:{self.title}'
+
 
 class List(models.Model):
     title = models.CharField(max_length=300)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='lists')
+    on_review = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = 'list'
         verbose_name_plural = 'lists'
+
+    def __str__(self):
+        return f'List: {self.title}'
 
 
 class Task(models.Model):
@@ -28,12 +38,20 @@ class Task(models.Model):
     description = models.CharField(max_length=300)
     dueDate = models.DateTimeField(default= datetime.datetime.now() + datetime.timedelta(days=7))
     created_at = models.DateTimeField(auto_now_add=True)
-    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='tasks')
+    attachment = models.FileField(upload_to='attachments', null=True, blank=True)
+    image = models.ImageField(upload_to='task_images', null = True, blank=True)
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_owner')
+    assigned = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_assigner', default=1)
+
 
     class Meta:
         verbose_name = 'task'
         verbose_name_plural = 'tasks'
+
+
+    def __str__(self):
+         return f'Task:{self.title}, {self.description}, due: {self.dueDate}, owner:{self.owner.name}'
 
 
 

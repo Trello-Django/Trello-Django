@@ -4,24 +4,18 @@ from my_auth.serializers import MyUserSerializer
 
 
 class BoardSerializer(serializers.ModelSerializer):
-    owner = MyUserSerializer(read_only=True)
-    # reviewer = MyUserSerializer(read_only=True)
     class Meta:
         model = Board
-        fields = ('title','owner','reviewer')
+        fields = ('id','title', 'created_at','status')
 
 class ListSerializer(serializers.ModelSerializer):
-    # board = BoardSerializer(write_only=True)
-
     class Meta:
         model = List
-        fields = ('title','board')
-
+        fields = ('id','title','board','on_review')
 
 class TaskSerializer(serializers.ModelSerializer):
     owner = MyUserSerializer(read_only=True)
-    list = ListSerializer
 
     class Meta:
         model = Task
-        fields = ('title','owner','list','description','dueDate','created_at',)
+        fields = ('id','title','description','dueDate','created_at','attachment', 'image', 'owner','assigned','list')
