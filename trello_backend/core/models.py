@@ -6,8 +6,8 @@ import datetime
 
 class Board(models.Model):
     STATUSES = (
-        (1,'ACTIVE'),
-        (2,'CLOSED')
+        (1, 'ACTIVE'),
+        (2, 'CLOSED')
     )
     title = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
@@ -16,6 +16,7 @@ class Board(models.Model):
     class Meta:
         verbose_name = 'core'
         verbose_name_plural = 'boards'
+
     def __str__(self):
         return f'Board:{self.title}'
 
@@ -36,22 +37,21 @@ class List(models.Model):
 class Task(models.Model):
     title = models.CharField(max_length=300)
     description = models.CharField(max_length=300)
-    dueDate = models.DateTimeField(default= datetime.datetime.now() + datetime.timedelta(days=7))
+    dueDate = models.DateTimeField(default=datetime.datetime.now() + datetime.timedelta(days=7))
     created_at = models.DateTimeField(auto_now_add=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE, related_name='tasks')
     attachment = models.FileField(upload_to='attachments', null=True, blank=True)
-    image = models.ImageField(upload_to='task_images', null = True, blank=True)
+    image = models.ImageField(upload_to='task_images', null=True, blank=True)
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_owner')
     assigned = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_assigner', default=1)
-
 
     class Meta:
         verbose_name = 'task'
         verbose_name_plural = 'tasks'
 
-
     def __str__(self):
-         return f'Task:{self.title}, {self.description}, due: {self.dueDate}, owner:{self.owner.name}'
+         return f'Task:{self.title}, {self.description}, due: {self.dueDate}, owner:{self.owner.username}'
+
 
 
 

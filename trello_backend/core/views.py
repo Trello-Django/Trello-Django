@@ -9,7 +9,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework_extensions.mixins import NestedViewSetMixin
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Board, List,Task
+from .models import Board, List, Task
 from .serializers import BoardSerializer, TaskSerializer, ListSerializer
 
 
@@ -20,12 +20,10 @@ class BoardViewSet(NestedViewSetMixin, ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
 
-
 class ListViewSet(NestedViewSetMixin, ModelViewSet):
 
     serializer_class = ListSerializer
     permission_classes = (IsAuthenticated,)
-
 
     def get_queryset(self):
         return List.objects.filter(board=self.kwargs.get('parent_lookup_board'))
@@ -33,7 +31,6 @@ class ListViewSet(NestedViewSetMixin, ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(board_id=self.kwargs.get('parent_lookup_board'))
 
-        
 
 class TaskViewSet(NestedViewSetMixin, ModelViewSet):
 
@@ -44,7 +41,7 @@ class TaskViewSet(NestedViewSetMixin, ModelViewSet):
         return Task.objects.filter(list=self.kwargs.get('parent_lookup_list'))
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user, list_id = self.kwargs.get('parent_lookup_list'))
+        serializer.save(owner=self.request.user, list_id=self.kwargs.get('parent_lookup_list'))
 
     #
     # @action(methods=['GET', 'POST'], detail=True)
