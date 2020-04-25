@@ -8,6 +8,7 @@ class TeamSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField(max_length=255, required=True)
     created_at = serializers.DateTimeField(required=False)
+    board_id = serializers.IntegerField(read_only=True)
     board = BoardSerializer(required=False)
 
     class Meta:
@@ -23,7 +24,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     phone = serializers.CharField(required=False)
     role = serializers.CharField(required=True)
     user = MyUserSerializer(required=False)
-    team_id = serializers.IntegerField(required=True)
+    team_id = serializers.IntegerField(read_only=True)
     team = TeamSerializer(required=False)
 
     class Meta:

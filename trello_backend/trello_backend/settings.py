@@ -185,3 +185,41 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s -- %(asctime)s: %(message)s',
+        },
+        'simple': {
+            'format': '%(levelname)s -- %(message)s'
+        }
+    },
+    'handlers': {
+        'homepage_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'homepage.log',
+            'formatter': 'verbose'
+        },
+        'core_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'core.log',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        'homepage': {
+            'handlers': ['homepage_handler'],
+            'level': 'DEBUG',
+        },
+        'core': {
+            'handlers': ['core_handler'],
+            'level': 'DEBUG',
+        },
+    },
+}
+

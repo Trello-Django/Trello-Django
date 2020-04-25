@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "30ca398d-843b-4b72-b92a-51b42eeab5a7",
+		"_postman_id": "d5e2ff97-246f-453c-a28f-1ccbca24027e",
 		"name": "Django-Trello",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -32,7 +32,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"asuleiman\",\n\t\"password\": \"aseke\"\n}\n",
+							"raw": "{\n\t\"username\": \"asuleiman3\",\n\t\"password\": \"363452403\"\n}\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -66,7 +66,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"asuleiman\",\n\t\"password\": \"363452403\"\n}"
+							"raw": "{\n\t\"username\": \"asuleiman3\",\n\t\"password\": \"363452403\"\n}"
 						},
 						"url": {
 							"raw": "{{BASE_URL}}/auth/register/",
@@ -100,7 +100,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"asuleiman\",\n\t\"new_password\": \"aseke\"\n}"
+							"raw": "{\n\t\"username\": \"asuleiman3\",\n\t\"new_password\": \"aseke\"\n}"
 						},
 						"url": {
 							"raw": "{{BASE_URL}}/auth/change_password/",
@@ -121,14 +121,186 @@
 		},
 		{
 			"name": "HomePage",
-			"item": [],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Board",
 			"item": [
 				{
-					"name": "BoardList",
+					"name": "Team List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Django-Trello dev team\",\n\t\"board_id\": 3\n}\n"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Django Trello renamed\",\n\t\"board_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/profile/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Create",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -140,7 +312,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\":\"Board2\"\n}\n",
+							"raw": "{\n\t\"name\": \"Assyl\",\n\t\"surname\": \"Suleiman\",\n\t\"role\": \"DEV\",\n\t\"team_id\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -148,12 +320,286 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/board/boards/",
+							"raw": "{{BASE_URL}}/homepage/profile/",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
-								"board",
+								"homepage",
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/asuleyman2403/Desktop/trello-django/urls.png"
+								},
+								{
+									"key": "name",
+									"value": "Assyl",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Suleiman",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "PM",
+									"type": "text"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/profile/3/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"profile",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/profile/2/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"profile",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Profile Change Role",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"role\": \"PM\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/profile/3/change_role/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"profile",
+								"3",
+								"change_role",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Member List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/2/member/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"2",
+								"member",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Member Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/2/member/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"2",
+								"member",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Member Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"name\",\n\t\"surname\": \"surname\",\n\t\"role\": \"DEV\",\n\t\"phone\": \"+77475896699\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/2/member/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"2",
+								"member",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Team Member Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/homepage/team/2/member/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"homepage",
+								"team",
+								"2",
+								"member",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Core",
+			"item": [
+				{
+					"name": "Board List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
 								"boards",
 								""
 							]
@@ -162,12 +608,478 @@
 					"response": []
 				},
 				{
-					"name": "ListList",
+					"name": "Board Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"This is a board\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Board Retrieve",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": ""
+							"raw": "{{BASE_URL}}/core/boards/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Board Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Title has been changed\",\n\t\"status\": 1\n}\n"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"1",
+								""
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Board Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"1",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/2/lists/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"2",
+								"lists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"TODO\",\n\t\"board\": 2,\n\t\"on_review\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/2/lists/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"2",
+								"lists",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/2/lists/3/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"2",
+								"lists",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"In progress\",\n\t\"board\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/2/lists/3/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"2",
+								"lists",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/boards/3/lists/3/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"boards",
+								"3",
+								"lists",
+								"3",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/lists/1/tasks/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"lists",
+								"1",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Task",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Need to do this task",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/asuleyman2403/Desktop/trello-django/urls.png"
+								},
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/Users/asuleyman2403/Desktop/trello-django/urls.txt"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/core/lists/1/tasks/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"lists",
+								"1",
+								"tasks",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Retrieve",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/lists/1/tasks/2/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"lists",
+								"1",
+								"tasks",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Task Task Task",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Modified",
+									"type": "text"
+								},
+								{
+									"key": "attachment",
+									"type": "file",
+									"src": "/Users/asuleyman2403/Desktop/trello-django/entity-relations.png"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/asuleyman2403/Desktop/trello-django/urls.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/core/lists/1/tasks/2/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"lists",
+								"1",
+								"tasks",
+								"2",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Task Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/core/lists/1/tasks/1/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"core",
+								"lists",
+								"1",
+								"tasks",
+								"1",
+								""
+							]
 						}
 					},
 					"response": []
