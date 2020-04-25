@@ -1,2 +1,2 @@
-from .cbv import MyUserAPIView, ChangePasswordAPIView
+from .cbv import MyUserAPIView
 

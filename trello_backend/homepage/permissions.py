@@ -24,3 +24,4 @@ class IsTeamMember(permissions.BasePermission):
 
     def has_object_permission(self, request, view, obj):
         return Team.objects.get(profile=Profile.objects.get(user=request.user)) == obj
+

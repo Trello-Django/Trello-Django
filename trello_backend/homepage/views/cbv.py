@@ -7,38 +7,63 @@ from rest_framework_extensions.mixins import NestedViewSetMixin
 from rest_framework.permissions import IsAuthenticated
 from homepage.models import Team, Profile
 from homepage.serializers import TeamSerializer, ProfileSerializer
+from core.models import Board
+
+import logging
+logger = logging.getLogger('homepage')
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
 
     permission_classes = (IsAuthenticated,)
-    query_set = Profile.objects.all()
+    queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+        logger.info(f'Profile with id = {serializer.data["id"]} created')
 
-    @action(methods=['GET', 'POST'], detail=True)
-    def change_role(self, request):
+    def perform_update(self, serializer):
         try:
             profile = Profile.objects.get(id=self.kwargs['pk'])
         except ObjectDoesNotExist:
             raise Http404
-        print(request)
-        serializer = ProfileSerializer(profile)
-        return Response(serializer.data)
+        role = profile.role
+        serializer.save(role=role)
+        logger.info(f'Profile with id = {serializer.data["id"]} updated')
+
+    @action(methods=['PUT'], detail=True)
+    def change_role(self, request, pk):
+        role = request.data.pop('role')
+        try:
+            profile = Profile.objects.filter(id=pk)
+        except ObjectDoesNotExist:
+            raise Http404
+        profile.update(role=role)
+        logger.info(f'Profile with id = {profile[0].id} changed role')
+        return Response({'status': 'role has been changed'}, status=200)
 
 
 class TeamViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
-    query_set = Team.objects.all()
+    queryset = Team.objects.all()
     serializer_class = TeamSerializer
 
     def perform_create(self, serializer):
-        serializer.save()
+        serializer.save(board_id=self.request.data.get('board_id'))
+        logger.info(f'Team with id = {serializer.data["id"]} created')
+
+    def perform_update(self, serializer):
+        try:
+            board = Board.objects.get(id=self.request.data.get('board_id'))
+            serializer.save(board_id=board.id)
+            logger.info(f'Team with id = {serializer.data["id"]} updated')
+        except Board.DoesNotExist:
+            raise Http404
 
 
 class TeamMemberViewSet(NestedViewSetMixin,
+                        mixins.ListModelMixin,
                         mixins.RetrieveModelMixin,
                         mixins.UpdateModelMixin,
                         mixins.DestroyModelMixin,
@@ -47,4 +72,13 @@ class TeamMemberViewSet(NestedViewSetMixin,
     serializer_class = ProfileSerializer
 
     def get_queryset(self):
-        return Profile.objects.filter(list=self.kwargs.get('parent_lookup_team'))
+        return Profile.objects.filter(team_id=self.kwargs.get('parent_lookup_team'))
+
+    def perform_update(self, serializer):
+        serializer.save()
+        logger.info(f'Team member(Profile) with id = {serializer.data["id"]} updated')
+
+    def perform_destroy(self, instance):
+        instance.delete()
+        logger.info(f'Team member(Profile) with id = {instance.data["id"]} deleted')
+
