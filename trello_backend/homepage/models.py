@@ -10,7 +10,7 @@ class TeamManager(models.Manager):
 class Team(models.Model):
     name = models.CharField(max_length=255, null=False)
     created_at = models.DateTimeField(auto_now=True, editable=False, null=False)
-    board = models.OneToOneField(Board, on_delete=models.CASCADE, related_name='team')
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='team')
     objects = TeamManager()
 
     class Meta:

@@ -2,8 +2,7 @@ AUTH:
     Auth && User:
         "auth/register/" Create
         "auth/login/" Create
-
-
+        "auth/change_password/" Update
 
 
 HOMEPAGE(PROFILE):

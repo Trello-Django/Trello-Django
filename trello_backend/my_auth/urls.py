@@ -6,7 +6,6 @@ from my_auth import views
 
 urlpatterns = [
     path('login/', obtain_jwt_token),
-    path('register/', views.MyUserAPIView.as_view()),
-    path('change_password/', views.ChangePasswordAPIView.as_view())
+    path('register/', views.MyUserAPIView.as_view())
 ]
 
