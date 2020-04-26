@@ -36,7 +36,6 @@ class ProfileSerializer(serializers.ModelSerializer):
     phone = serializers.CharField(required=False)
     role = serializers.CharField(required=True)
     user = MyUserSerializer(required=False)
-    team_id = serializers.IntegerField(read_only=True)
     team = TeamSerializer(required=False)
 
     class Meta:
