@@ -44,13 +44,16 @@ class TaskViewSet(NestedViewSetMixin, ModelViewSet):
         serializer.save(owner=self.request.user, list_id=self.kwargs.get('parent_lookup_list'))
 
     #
-    # @action(methods=['GET', 'POST'], detail=True)
-    # def lists(self, request, pk):
+    # @action(methods=['PUT'], detail=True)
+    # def complete_task(self, request, pk, parent_lookup_list):
     #     pkk = self.kwargs.get('pk')
-    #
+    #     print(pkk)
     #     try:
-    #         list = List.objects.filter(board = Board.objects.get(id=pkk))
+    #         task = Task.objects.filter(id = pkk)
     #     except ObjectDoesNotExist:
     #         raise Http404
-    #     serializer = ListSerializer(list, many=True)
+    #     serializer = TaskSerializer(task, many = True)
+    #     if serializer.is_valid():
+    #         serializer.save(completed=False)
+    #
     #     return Response(serializer.data)
