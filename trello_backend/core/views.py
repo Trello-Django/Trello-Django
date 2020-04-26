@@ -69,13 +69,3 @@ class TaskViewSet(NestedViewSetMixin, ModelViewSet):
         instance.delete()
         logger.info(f'Task with id = {instance.id} deleted')
 
-    # @action(methods=['GET', 'POST'], detail=True)
-    # def lists(self, request, pk):
-    #     pkk = self.kwargs.get('pk')
-    #
-    #     try:
-    #         list = List.objects.filter(board = Board.objects.get(id=pkk))
-    #     except ObjectDoesNotExist:
-    #         raise Http404
-    #     serializer = ListSerializer(list, many=True)
-    #     return Response(serializer.data)

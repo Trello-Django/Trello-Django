@@ -44,6 +44,7 @@ class Task(models.Model):
     image = models.ImageField(upload_to='task_images', null=True, blank=True)
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_owner')
     assigned = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_assigner', default=1)
+    completed = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = 'task'

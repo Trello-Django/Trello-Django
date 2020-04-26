@@ -40,7 +40,7 @@ class Profile(models.Model):
     date_of_birth = models.DateField(null=True, editable=True, auto_now=False)
     phone = models.CharField(max_length=255, null=True, default='')
     role = models.CharField(choices=ROLES, default=DEVELOPER, null=False, max_length=255)
-    user = models.OneToOneField(MyUser, null=False, on_delete=models.CASCADE, related_name='profile')
+    user = models.ForeignKey(MyUser, null=False, on_delete=models.CASCADE, related_name='profile')
     team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True)
     objects = ProfileManager()
 
