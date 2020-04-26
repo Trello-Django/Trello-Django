@@ -4,6 +4,13 @@ from my_auth.models import MyUser
 import datetime
 
 
+class BoardManager(models.Manager):
+    pass
+
+class BoardStatusCountManager(models.Manager):
+    def status_count(self, status):
+        return self.filter(status=status).count()
+
 class Board(models.Model):
     STATUSES = (
         (1, 'ACTIVE'),
@@ -13,6 +20,9 @@ class Board(models.Model):
     created_at = models.DateTimeField(auto_now_add=True,blank=True, null=True)
     status = models.IntegerField(choices=STATUSES, default=1)
 
+    objects = BoardManager()
+    status_count = BoardStatusCountManager()
+
     class Meta:
         verbose_name = 'core'
         verbose_name_plural = 'boards'
@@ -20,11 +30,15 @@ class Board(models.Model):
     def __str__(self):
         return f'Board:{self.title}'
 
+class Listmanager(models.Manager):
+    pass
 
 class List(models.Model):
     title = models.CharField(max_length=300)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='lists')
     on_review = models.BooleanField(default=True)
+
+    objects = Listmanager()
 
     class Meta:
         verbose_name = 'list'
@@ -32,6 +46,10 @@ class List(models.Model):
 
     def __str__(self):
         return f'List: {self.title}'
+
+class TaskManager(models.Manager):
+    def for_owner(self):
+        return self.filter(owner = self.request.user)
 
 
 class Task(models.Model):
@@ -45,6 +63,8 @@ class Task(models.Model):
     owner = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_owner')
     assigned = models.ForeignKey(MyUser, on_delete=models.CASCADE, related_name='task_assigner', default=1)
     completed = models.BooleanField(default=False)
+
+    objects = TaskManager()
 
     class Meta:
         verbose_name = 'task'

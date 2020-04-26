@@ -55,7 +55,7 @@ class TaskViewSet(NestedViewSetMixin, ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        return Task.objects.filter(list=self.kwargs.get('parent_lookup_list'))
+        return Task.objects.for_owner().filter(list=self.kwargs.get('parent_lookup_list'))
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user, list_id=self.kwargs.get('parent_lookup_list'))

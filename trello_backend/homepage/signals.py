@@ -12,7 +12,7 @@ def user_created(sender, instance, created, **kwargs):
 
 @receiver(post_delete, sender = Profile)
 def profile_deleted(sender, instance, **kwargs):
-    team_id = instance.team
+    team_id = instance.team_id
     team = Team.objects.get(id=team_id)
     if team.profile_set.count() == 0:
         team.delete()
