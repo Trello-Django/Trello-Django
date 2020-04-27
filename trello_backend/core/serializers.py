@@ -14,9 +14,9 @@ class BoardSerializer(serializers.Serializer):
         board.save()
         return board
 
-    def update(self, instance,validated_data):
-        instance.name = validated_data.get('title', instance.title)
-        instance.type = validated_data.get('status', instance.status)
+    def update(self, instance, validated_data):
+        instance.title = validated_data.get('title', instance.title)
+        instance.status = validated_data.get('status', instance.status)
         instance.save()
         return instance
 

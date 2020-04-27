@@ -20,7 +20,9 @@ class ProfileViewSet(viewsets.ModelViewSet):
     serializer_class = ProfileSerializer
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        team_id = self.request.data.get('team_id')
+        team = Team.objects.get(id=team_id)
+        serializer.save(user=self.request.user, team=team, team_id=team_id)
         logger.info(f'Profile with id = {serializer.data["id"]} created')
 
     def perform_update(self, serializer):
@@ -29,8 +31,13 @@ class ProfileViewSet(viewsets.ModelViewSet):
         except ObjectDoesNotExist:
             raise Http404
         role = profile.role
-        serializer.save(role=role)
+        team_id = self.request.data.get('team_id')
+        team = Team.objects.get(id=team_id)
+        serializer.save(role=role, team=team, team_id=team_id)
         logger.info(f'Profile with id = {serializer.data["id"]} updated')
+
+    def perform_destroy(self, instance):
+        print(instance)
 
     @action(methods=['PUT'], detail=True)
     def change_role(self, request, pk):

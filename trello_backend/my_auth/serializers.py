@@ -15,3 +15,7 @@ class MyUserSerializer(serializers.ModelSerializer):
         user.save()
         return user
 
+    def validate_username(self, value):
+        if not len(value) >= 5:
+            raise serializers.ValidationError("Username should contain more than 4 symbols")
+        return value
